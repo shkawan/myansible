@@ -1,0 +1,5 @@
+- hosts: others
+  sudo: yes
+  roles:
+    - common
+    - nginx
