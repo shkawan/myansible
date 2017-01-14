@@ -1,11 +1,20 @@
+- name: Install libselinux-python
+  yum: name=libselinux-python state=present
+  when: ansible_os_family == "RedHat"
+- name: make selinux disable
+  selinux: state=disabled
+  when: ansible_os_family == "RedHat"
 - name: Install NTP
   yum: name=ntp state=latest
+  when: ansible_os_family == "RedHat"
 - name: Configure NTP
   template: src=ntp.conf.j2 dest=/etc/ntp.conf
   notify:
     - restart ntpd
+  when: ansible_os_family == "RedHat"
 - name: Be sure NTPd is running and enabled
   service: name=ntpd state=started enabled=yes
+  when: ansible_os_family == "RedHat"
 
 - name: Add user
   user: name={{usergroup.user.name}} state=present password={{usergroup.user.password}} groups=wheel

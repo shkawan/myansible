@@ -1,6 +1,6 @@
 server {
     listen 11180 default_server;
-    server_name local.localdomain;
+    server_name {{ ansible_hostname }};
 
     root /usr/share/nginx/html;
     index index.html;
