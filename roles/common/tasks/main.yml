@@ -1,3 +1,5 @@
+- name: timezone to Japan
+  file: src=/usr/share/zoneinfo/posix/Asia/Tokyo dest=/etc/localtime state=link
 - name: Install libselinux-python
   yum: name=libselinux-python state=present
   when: ansible_os_family == "RedHat"
