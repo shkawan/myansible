@@ -1,13 +1,10 @@
 - name: timezone to Japan
   file: src=/usr/share/zoneinfo/posix/Asia/Tokyo dest=/etc/localtime state=link
-- name: Install libselinux-python
-  yum: name=libselinux-python state=present
-  when: ansible_os_family == "RedHat"
+- name: Install {{item}}
+  yum: name={{item}} state=latest
+  with_items: rpm
 - name: make selinux disable
   selinux: state=disabled
-  when: ansible_os_family == "RedHat"
-- name: Install NTP
-  yum: name=ntp state=latest
   when: ansible_os_family == "RedHat"
 - name: Configure NTP
   template: src=ntp.conf.j2 dest=/etc/ntp.conf
