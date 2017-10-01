@@ -1,3 +1,10 @@
+---
+install_packages:
+  - epel-release
+  - libselinux-python 
+  - ntp
+  - nginx
+
 usergroup:
   user:
     name: kurino
@@ -5,8 +12,3 @@ usergroup:
     uid: 12908
     password: $6$EMigNLoQ$8nx6jYYJROJdhqJIMXMUuc1gKre76xZ9j6e8mJYrjZP54bcikTpu43e35oJwQ82rsHIKcDsdPX22XJ.WoMU870
 
-rpm:
-  - epel-release
-  - libselinux-python 
-  - ntp
-  - nginx

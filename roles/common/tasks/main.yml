@@ -1,8 +1,13 @@
+- name: Add user
+  user: name={{usergroup.user.name}} state=present password={{usergroup.user.password}} groups=wheel
 - name: timezone to Japan
-  file: src=/usr/share/zoneinfo/posix/Asia/Tokyo dest=/etc/localtime state=link
-- name: Install {{item}}
-  yum: name={{item}} state=latest
-  with_items: rpm
+  file: src=/usr/share/zoneinfo/posix/Asia/Tokyo dest=/etc/localtime state=hard force=yes
+  ignore_errors: true
+- name: Install "{{ item }}"
+  yum: name={{ item }} state=present
+  with_items: 
+    - "{{install_packages}}"
+  become: yes
 - name: make selinux disable
   selinux: state=disabled
   when: ansible_os_family == "RedHat"
@@ -15,5 +20,3 @@
   service: name=ntpd state=started enabled=yes
   when: ansible_os_family == "RedHat"
 
-- name: Add user
-  user: name={{usergroup.user.name}} state=present password={{usergroup.user.password}} groups=wheel
