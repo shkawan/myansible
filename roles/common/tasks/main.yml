@@ -3,7 +3,7 @@
 - name: timezone to Japan
   file: src=/usr/share/zoneinfo/posix/Asia/Tokyo dest=/etc/localtime state=hard force=yes
   ignore_errors: true
-- name: Install "{{ item }}"
+- name: Install {{ install_packages }}
   yum: name={{ item }} state=present
   with_items: 
     - "{{install_packages}}"
