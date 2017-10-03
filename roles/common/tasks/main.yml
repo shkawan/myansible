@@ -1,3 +1,7 @@
+- name: debug accoung.usergroups
+  debug:
+    msg: "{{item}}"
+  with_items: "{{account.usergroups}}"
 - name: Add user
   user: name="{{item.name}}" state=present groups="{{item.group}}" password="{{item.password}}" uid="{{item.uid}}"
   with_items: "{{account.usergroups}}"
@@ -20,4 +24,3 @@
 - name: Be sure NTPd is running and enabled
   service: name=ntpd state=started enabled=yes
   when: ansible_os_family == "RedHat"
-
