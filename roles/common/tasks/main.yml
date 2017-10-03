@@ -1,5 +1,5 @@
 - name: Add user
-  user: name={{item.name}} state=present password={{item.password}} uid={{item.uid}} gid={{item.gid}} groups={{item.group}} 
+  user: name="{{item.name}}" state=present password="{{item.password}}" uid="{{item.uid}}" gid="{{item.gid}}" groups="{{item.group}}"
   with_items: "{{usergroup}}"
 - name: timezone to Japan
   file: src=/usr/share/zoneinfo/posix/Asia/Tokyo dest=/etc/localtime state=hard force=yes
